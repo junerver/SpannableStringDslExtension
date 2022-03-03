@@ -5,4 +5,4 @@
 相比文章做了更多的扩展，利用 kotlin 语法糖做了一些有趣的事情，欢迎star & PR。
 
 使用：
-` implementation 'xyz.junerver.ssktx:ss-ktx:1.1.1'`
+` implementation 'xyz.junerver.ssktx:ss-ktx:0.0.1'`
