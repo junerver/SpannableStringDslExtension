@@ -11,6 +11,7 @@
 
 <img
 src="./art/11b3f615be00077561230273f0eb724.jpg"
+width = "300"
 align=center />
 
 
