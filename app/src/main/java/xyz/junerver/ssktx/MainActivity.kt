@@ -30,20 +30,20 @@ class MainActivity : AppCompatActivity() {
             "还可以这样用"{
                 setBackgroundColor("#ffff99")
             }
-            addText("我已详细阅读并同意") {
+            addText("\n我已详细阅读并同意") {
                 setBackgroundColor("#FF9900")
                 setStyle(Typeface.BOLD_ITALIC)
                 userUnderLine()
                 useStrikethrough()
                 setDrawableRight(R.drawable.icon_dingding, DynamicDrawableSpan.ALIGN_CENTER)
             }
-            addText("打电话") {
+            addText("\n打电话") {
                 asURL("tel:10086")
             }
             addText("《隐私政策》") {
                 setForegroundColor("#0099FF")
                 setDrawableLeft(R.drawable.icon_wechat)
-                onClick() {
+                onClick {
 
                 }
             }
