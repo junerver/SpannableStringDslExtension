@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.text.Layout
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.TextPaint
@@ -95,6 +96,10 @@ interface DslSpanBuilder {
     //设置文字颜色
     fun setForegroundColor(@Size(min = 1) colorString: String)
     fun setForegroundColor(@ColorRes colorId: Int)
+    //设置文字布局
+    fun setAlignment(align: Layout.Alignment)
+    //设置文字大小
+    fun setTextSize(size: Int)
 
     //设置文字背景色
     fun setBackgroundColor(@Size(min = 1) colorString: String)
@@ -143,6 +148,8 @@ interface DslSpanBuilder {
 
 class DslSpanBuilderImpl(private val textView: TextView) : DslSpanBuilder {
     var foregroundColorSpan: ForegroundColorSpan? = null
+    var alignmentSpan: AlignmentSpan? = null
+    var textSizeSpan: AbsoluteSizeSpan? = null
     var backgroundColorSpan: BackgroundColorSpan? = null
     var styleSpan: StyleSpan? = null
     var onClickSpan: ClickableSpan? = null
@@ -150,7 +157,7 @@ class DslSpanBuilderImpl(private val textView: TextView) : DslSpanBuilder {
     var underlineSpan: UnderlineSpan? = null
     var strikethroughSpan: StrikethroughSpan? = null
     var urlSpan: URLSpan? = null
-    internal val spanList = mutableListOf<CharacterStyle?>()
+    internal val spanList = mutableListOf<Any?>()
 
     //添加的 drawable 默认位于文字左侧
     var drawableLeft = true
@@ -163,6 +170,16 @@ class DslSpanBuilderImpl(private val textView: TextView) : DslSpanBuilder {
     override fun setForegroundColor(@ColorRes colorId: Int) {
         foregroundColorSpan = ForegroundColorSpan(textView.context.getColorRes(colorId))
         spanList.add(foregroundColorSpan)
+    }
+
+    override fun setAlignment(align: Layout.Alignment) {
+        alignmentSpan = AlignmentSpan.Standard(align)
+        spanList.add(alignmentSpan)
+    }
+
+    override fun setTextSize(size: Int) {
+        textSizeSpan = AbsoluteSizeSpan(size)
+        spanList.add(textSizeSpan)
     }
 
     override fun setBackgroundColor(@Size(min = 1) colorString: String) {

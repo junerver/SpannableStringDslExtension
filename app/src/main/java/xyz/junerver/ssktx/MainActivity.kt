@@ -1,18 +1,10 @@
 package xyz.junerver.ssktx
 
-import android.Manifest
-import android.content.pm.ActivityInfo
-import android.content.res.Configuration
 import android.graphics.Typeface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.InputType
-import android.text.TextWatcher
-import android.text.method.DigitsKeyListener
-import android.text.style.DynamicDrawableSpan
-import android.util.Log
+import android.text.Layout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 
 private const val TAG = "MainActivity"
@@ -28,6 +20,8 @@ class MainActivity : AppCompatActivity() {
                 setBackgroundColor("#ff0099")
             }
             "还可以这样用"{
+                setAlignment(Layout.Alignment.ALIGN_CENTER)
+                setTextSize(44)
                 setBackgroundColor("#ffff99")
             }
             addText("\n我已详细阅读并同意") {
@@ -35,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 setStyle(Typeface.BOLD_ITALIC)
                 userUnderLine()
                 useStrikethrough()
-                setDrawableRight(R.drawable.icon_dingding, DynamicDrawableSpan.ALIGN_CENTER)
+                setDrawableRight(R.drawable.icon_dingding)
             }
             addText("\n打电话") {
                 asURL("tel:10086")
@@ -46,6 +40,14 @@ class MainActivity : AppCompatActivity() {
                 onClick {
 
                 }
+            }
+        }
+
+        findViewById<TextView>(R.id.tv_test2).buildSpannableString {
+            "我是一个居中的文字内容"{
+                setAlignment(Layout.Alignment.ALIGN_CENTER)
+                setTextSize(44)
+                setBackgroundColor("#ffff99")
             }
         }
     }
