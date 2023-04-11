@@ -14,6 +14,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.*
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.Size
@@ -96,6 +97,7 @@ interface DslSpanBuilder {
     //设置文字颜色
     fun setForegroundColor(@Size(min = 1) colorString: String)
     fun setForegroundColor(@ColorRes colorId: Int)
+    fun setForegroundColor(@ColorInt color: Int, isRes: Boolean = false)
     //设置文字布局
     fun setAlignment(align: Layout.Alignment)
     //设置文字大小
@@ -172,6 +174,11 @@ class DslSpanBuilderImpl(private val textView: TextView) : DslSpanBuilder {
         spanList.add(foregroundColorSpan)
     }
 
+    override fun setForegroundColor(@ColorInt color: Int, isRes: Boolean) {
+        foregroundColorSpan = ForegroundColorSpan(color)
+        spanList.add(foregroundColorSpan)
+    }
+
     override fun setAlignment(align: Layout.Alignment) {
         alignmentSpan = AlignmentSpan.Standard(align)
         spanList.add(alignmentSpan)
@@ -245,7 +252,7 @@ class DslSpanBuilderImpl(private val textView: TextView) : DslSpanBuilder {
     }
 
     override fun setStyle(style: Int) {
-        if (style in Typeface.NORMAL..Typeface.BOLD_ITALIC) {
+        if (style in IntRange(Typeface.NORMAL,Typeface.BOLD_ITALIC)) {
             styleSpan = StyleSpan(style)
             spanList.add(styleSpan)
         }
