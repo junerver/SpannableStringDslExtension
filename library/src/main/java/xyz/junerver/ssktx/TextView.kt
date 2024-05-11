@@ -124,7 +124,7 @@ interface DslSpanBuilder {
     fun setDrawableRight(drawable: Drawable, alignment: Int = DynamicDrawableSpan.ALIGN_BASELINE)
 
     //下划线
-    fun userUnderLine()
+    fun useUnderLine()
 
     //删除线
     fun useStrikethrough()
@@ -236,7 +236,7 @@ class DslSpanBuilderImpl(private val textView: TextView) : DslSpanBuilder {
         setDrawable(drawable, false, alignment)
     }
 
-    override fun userUnderLine() {
+    override fun useUnderLine() {
         underlineSpan = UnderlineSpan()
         spanList.add(underlineSpan)
     }
