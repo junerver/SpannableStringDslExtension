@@ -5,7 +5,7 @@
 相比文章做了更多的扩展，利用 kotlin 语法糖做了一些有趣的事情，欢迎star & PR。
 
 使用：
-` implementation 'xyz.junerver.ssktx:ss-ktx:0.0.1'`
+` implementation 'xyz.junerver.ssktx:ss-ktx:0.0.4'`
 
 通过一个扩展函数，使用 DSL 风格的代码，轻松的构建 SpannableString ：
 
