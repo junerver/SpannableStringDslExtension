@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package xyz.junerver.ssktx
 
 import android.content.Context
@@ -38,7 +40,7 @@ class DslSpannableStringBuilderImpl(private val textView: TextView) : DslSpannab
 
     //记录上次添加文字后最后的索引值
     private var lastIndex: Int = 0
-    var isClickable = false
+    internal var isClickable = false
 
     //内部扩展函数，在这个作用域外无法调用
     fun String.asSpannableString(method: (DslSpanBuilder.() -> Unit)? = null) {
@@ -149,16 +151,16 @@ interface DslSpanBuilder {
 }
 
 class DslSpanBuilderImpl(private val textView: TextView) : DslSpanBuilder {
-    var foregroundColorSpan: ForegroundColorSpan? = null
-    var alignmentSpan: AlignmentSpan? = null
-    var textSizeSpan: AbsoluteSizeSpan? = null
-    var backgroundColorSpan: BackgroundColorSpan? = null
-    var styleSpan: StyleSpan? = null
+    private var foregroundColorSpan: ForegroundColorSpan? = null
+    private var alignmentSpan: AlignmentSpan? = null
+    private var textSizeSpan: AbsoluteSizeSpan? = null
+    private var backgroundColorSpan: BackgroundColorSpan? = null
+    private var styleSpan: StyleSpan? = null
     var onClickSpan: ClickableSpan? = null
     var imageSpan: ImageSpan? = null
-    var underlineSpan: UnderlineSpan? = null
-    var strikethroughSpan: StrikethroughSpan? = null
-    var urlSpan: URLSpan? = null
+    private var underlineSpan: UnderlineSpan? = null
+    private var strikethroughSpan: StrikethroughSpan? = null
+    private var urlSpan: URLSpan? = null
     internal val spanList = mutableListOf<Any?>()
 
     //添加的 drawable 默认位于文字左侧
@@ -293,9 +295,8 @@ class VerticalImageSpan(context: Context, resourceId: Int, verticalAlignment: In
     ) {
         val b = drawable
         canvas.save()
-        var transY = 0
         //获得将要显示的文本高度 - 图片高度除2 = 居中位置+top(换行情况)
-        transY = (bottom - top - b.bounds.bottom) / 2 + top
+        val transY: Int = (bottom - top - b.bounds.bottom) / 2 + top
         //偏移画布后开始绘制
         canvas.translate(x, transY.toFloat())
         b.draw(canvas)
